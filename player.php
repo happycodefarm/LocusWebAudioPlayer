@@ -34,8 +34,13 @@ if (get_request('pos')!==null) {
   $array = [];
 
 	$pos =( (int)get_request('pos')) % count($files);
+
+
   $title = basename($files[$pos], ".mp3");
+
   @$description = file_get_contents("audios/".$title.".txt");
+  $title = preg_replace("/^[0-9\\.\\-_\\s]+/", "", $title);
+
   if ($description === false) $description = "";
   $array = [
     "title" => $title,
